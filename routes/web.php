@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\AdminPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +23,13 @@ Route::get('/', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'can:admin'])->name('dashboard');
+
+Route::get('/{post}', function (Post $post) {
+    return view("posts.show", ['post' => $post]);
+})->where('post', '.*');
+
+Route::middleware('can:admin')->group(function () {
+     Route::resource('admin/posts', AdminPostController::class)->except('show');
+ });
 
 require __DIR__.'/auth.php';
