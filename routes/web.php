@@ -24,12 +24,13 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'can:admin'])->name('dashboard');
 
-Route::get('/{post}', function (Post $post) {
-    return view("posts.show", ['post' => $post]);
-})->where('post', '.*');
+require __DIR__.'/auth.php';
 
 Route::middleware('can:admin')->group(function () {
      Route::resource('admin/posts', AdminPostController::class)->except('show');
  });
 
-require __DIR__.'/auth.php';
+// Wildcard route to handle all other requests to see if a Post exists with that slug
+Route::get('/{post}', function (Post $post) {
+    return view("posts.show", ['post' => $post]);
+})->where('post', '.*');
