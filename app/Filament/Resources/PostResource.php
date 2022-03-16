@@ -2,14 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
-use App\Models\Post;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\Post;
 use Filament\Tables;
+use Illuminate\Support\Str;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Actions\LinkAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
+use App\Filament\Resources\PostResource\Pages;
+use Filament\Forms\Components\BelongsToSelect;
+use App\Filament\Resources\PostResource\RelationManagers;
 
 class PostResource extends Resource
 {
@@ -21,14 +34,24 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('body')
-                    ->required(),
+                Card::make([
+                    TextInput::make('title')
+                        ->reactive()
+                        ->required()
+                        ->afterStateUpdated(function ($set, ?string $state) {
+                            $set('slug', Str::slug($state));
+                        }),
+                    TextInput::make('slug')
+                        ->required()
+                        ->unique(ignorable: fn ($record) => $record),
+                    RichEditor::make('body')
+                        ->columnSpan(2)
+                        ->nullable(),
+                    DateTimePicker::make('published_at')
+                        ->nullable()
+                        ->helperText('If in the past, the post will go live immediately.'),
+                ])
+                    ->columns(2)
             ]);
     }
 
