@@ -24,9 +24,9 @@ Route::get('/about', function () {
     return view('pages.about');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'can:admin'])->name('dashboard');
+// Route::get('/admin/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'can:admin'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
