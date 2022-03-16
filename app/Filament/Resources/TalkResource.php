@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use App\Models\Post;
+use App\Models\Talk;
 use Filament\Tables;
 use Illuminate\Support\Str;
 use Filament\Resources\Form;
@@ -15,18 +15,17 @@ use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\RichEditor;
-use App\Filament\Resources\PostResource\Pages;
-use Filament\Forms\Components\BelongsToSelect;
-use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\TalkResource\Pages;
+use App\Filament\Resources\TalkResource\RelationManagers;
 
-class PostResource extends Resource
+class TalkResource extends Resource
 {
-    protected static ?string $model = Post::class;
+    protected static ?string $model = Talk::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -37,19 +36,22 @@ class PostResource extends Resource
                 Card::make([
                     TextInput::make('title')
                         ->reactive()
-                        ->required()
-                        ->afterStateUpdated(function ($set, ?string $state) {
-                            $set('slug', Str::slug($state));
-                        }),
-                    TextInput::make('slug')
-                        ->required()
-                        ->unique(ignorable: fn ($record) => $record),
+                        ->required(),
+                    DateTimePicker::make('published_at')
+                        ->label('Spoke on')
+                        ->nullable()
+                        ->helperText('When was the talk given?')
+                        ->required(),
                     RichEditor::make('body')
                         ->columnSpan(2)
+                        ->required()
                         ->nullable(),
-                    DateTimePicker::make('published_at')
+                    TextInput::make('slides_link')
                         ->nullable()
-                        ->helperText('If in the past, the post will go live immediately.'),
+                        ->helperText('Google Slides link, Will open in a new tab if provided.'),
+                    TextInput::make('recording_link')
+                        ->nullable()
+                        ->helperText('Link to video recording on YouTube or another site.'),
                 ])
                     ->columns(2)
             ]);
@@ -59,14 +61,7 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                //
             ])
             ->filters([
                 //
@@ -83,9 +78,9 @@ class PostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record:slug}/edit'),
+            'index' => Pages\ListTalks::route('/'),
+            'create' => Pages\CreateTalk::route('/create'),
+            'edit' => Pages\EditTalk::route('/{record}/edit'),
         ];
     }
 }
