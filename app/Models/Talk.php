@@ -9,6 +9,10 @@ class Talk extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     // Disable mass-assignment protection
     protected $guarded = [];
 }

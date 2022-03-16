@@ -11,7 +11,7 @@
         <div class="relative px-4 sm:px-6 lg:px-8">
             <div class="text-lg max-w-prose mx-auto">
                 @foreach ($posts as $post)
-                    <x-post-list-item :post="$post" />
+                    <x-posts.post-list-item :post="$post" />
                 @endforeach
             </div>
         </div>

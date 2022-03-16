@@ -46,12 +46,12 @@ class TalkResource extends Resource
                         ->columnSpan(2)
                         ->required()
                         ->nullable(),
-                    TextInput::make('slides_link')
-                        ->nullable()
-                        ->helperText('Google Slides link, Will open in a new tab if provided.'),
                     TextInput::make('recording_link')
                         ->nullable()
                         ->helperText('Link to video recording on YouTube or another site.'),
+                    TextInput::make('slides_link')
+                        ->nullable()
+                        ->helperText('Google Slides link, Will open in a new tab if provided.'),
                 ])
                     ->columns(2)
             ]);

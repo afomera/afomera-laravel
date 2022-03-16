@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\Talk;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\AdminPostController;
@@ -25,7 +26,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/speaking', function () {
-    return view('pages.speaking');
+    return view('pages.speaking', ['talks' => Talk::latest('published_at')->get()]);
 });
 
 Route::get('/posts', function () {
