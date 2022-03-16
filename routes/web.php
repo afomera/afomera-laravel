@@ -24,8 +24,12 @@ Route::get('/about', function () {
     return view('pages.about');
 });
 
+Route::get('/speaking', function () {
+    return view('pages.speaking');
+});
+
 Route::get('/posts', function () {
-    return view('posts.index', ['posts' => Post::all()]);
+    return view('posts.index', ['posts' => Post::latest('published_at')->get()]);
 });
 
 // Route::get('/admin/dashboard', function () {
@@ -37,6 +41,11 @@ require __DIR__.'/auth.php';
 // Route::middleware('can:admin')->group(function () {
 //      Route::resource('admin/posts', AdminPostController::class)->except('show');
 //  });
+
+Route::get('/posts/{post}', function (Post $post) {
+    return view("posts.show", ['post' => $post]);
+})->where('post', '.*');
+
 
 // Wildcard route to handle all other requests to see if a Post exists with that slug
 Route::get('/{post}', function (Post $post) {
