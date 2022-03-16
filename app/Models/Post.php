@@ -9,6 +9,9 @@ class Post extends Model
 {
     use HasFactory;
 
+    // Disable mass-assignment protection
+    protected $guarded = [];
+
     public function getRouteKeyName()
     {
         return 'slug';
