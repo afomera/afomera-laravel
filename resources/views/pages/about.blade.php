@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <div class="mb-5">
+        <x-gradient-link href="/" class="text-xl">
+            <- Go home</x-gradient-link>
+    </div>
+
     <x-page-header title="About Me" />
 
     <div class="relative">

@@ -19,7 +19,6 @@
         </div>
     </div>
 
-
     <div class="prose prose-xl dark:prose-invert flex items-center space-x-8">
         @if ($talk->recording_link)
             <x-external-link :href="$talk->recording_link">Recording</x-external-link>
