@@ -18,7 +18,7 @@ use App\Http\Controllers\AdminPostController;
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    return view('pages.index', ['latestPost' => Post::published()->latest('published_at')->first()]);
 });
 
 Route::get('/about', function () {
@@ -26,11 +26,11 @@ Route::get('/about', function () {
 });
 
 Route::get('/speaking', function () {
-    return view('pages.speaking', ['talks' => Talk::latest('published_at')->get()]);
+    return view('pages.speaking', ['talks' => Talk::latest('published_at')->published()->get()]);
 });
 
 Route::get('/posts', function () {
-    return view('posts.index', ['posts' => Post::latest('published_at')->get()]);
+    return view('posts.index', ['posts' => Post::latest('published_at')->published()->get()]);
 });
 
 // Route::get('/admin/dashboard', function () {

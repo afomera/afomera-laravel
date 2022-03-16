@@ -13,6 +13,11 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    public function scopePublished($query)
+    {
+        return $query->whereNot('published_at', null);
+    }
+
     // Disable mass-assignment protection
     protected $guarded = [];
 

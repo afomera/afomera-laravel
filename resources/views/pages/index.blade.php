@@ -62,16 +62,18 @@
         <!-- TODO, Latest post section -->
         <div class="prose prose-xl dark:prose-invert mt-20">
             <div class="flex items-center space-x-2">
-                -if @latest_post.published_at.to_date > 1.month.ago
+                {{-- -if @latest_post.published_at.to_date > 1.month.ago
                 <span
                     class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-pink-100 text-pink-800">
                     New post!
                 </span>
-                endif
+                endif --}}
 
-                <span>Want to read my latest post,
-                    <a href="/#{@latest_post.slug}"
-                        class="font-semibold underline text-fuchsia-500 decoration-2 decoration-fuchsia-500">latest_post.title</a>?</span>
+                @if ($latestPost)
+                    <span>Want to read my latest post,
+                        <a href="/posts/{{ $latestPost->slug }}"
+                            class="font-semibold underline text-fuchsia-500 decoration-2 decoration-fuchsia-500">{{ $latestPost->title }}</a>?</span>
+                @endif
             </div>
         </div>
     </div>
