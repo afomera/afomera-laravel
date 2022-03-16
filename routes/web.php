@@ -24,6 +24,10 @@ Route::get('/about', function () {
     return view('pages.about');
 });
 
+Route::get('/posts', function () {
+    return view('posts.index', ['posts' => Post::all()]);
+});
+
 // Route::get('/admin/dashboard', function () {
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'can:admin'])->name('dashboard');

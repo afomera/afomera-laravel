@@ -1,12 +1,16 @@
 <x-guest-layout>
-    <h1 class="text-5xl">{{ $post->title }}</h1>
+    <div class="mb-5">
+        <x-gradient-link href="/posts" class="text-xl">
+            <- See more posts</x-gradient-link>
+    </div>
 
-    <img src="/images/avatar_2021.jpeg" alt="Andrea Fomera avatar"
-        class="object-cover shadow-lg rounded-lg h-48 w-48 [clip-path:circle()]">
+    <x-page-header :title="$post->title" />
 
-    published_at : {{ $post->published_at }}
-    slug: {{ $post->slug }}
-
-    <div>Body:</div>
-    {!! $post->body !!}
+    <div class="relative">
+        <div class="text-lg max-w-prose mx-auto">
+            <div class="prose dark:prose-invert prose-pink lg:prose-lg">
+                {!! $post->body !!}
+            </div>
+        </div>
+    </div>
 </x-guest-layout>

@@ -65,17 +65,14 @@
             <div class="flex justify-center">
                 <div class="w-full flex justify-center mt-5 md:mt-0">
                     <div class="font-medium text-lg md:text-xl">
-                        <a href="/about"
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500 mr-5">About</a>
-                        <a href="/posts"
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500 mr-5">Posts</a>
-                        <a href="/speaking"
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500 mr-5">Speaking</a>
-                        <a href="https://store.afomera.dev" target="_blank"
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500 mr-5">Courses</a>
-                        <a href="mailto:andrea.fomera@gmail.com"
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500 mr-5">Email
-                            me</a>
+                        <x-gradient-link href="/about" class="mr-5">About</x-gradient-link>
+                        <x-gradient-link href="/posts" class="mr-5">Posts</x-gradient-link>
+                        <x-gradient-link href="/speaking" class="mr-5">Speaking</x-gradient-link>
+                        <x-gradient-link href="https://store.afomera.dev" target="_blank" class="mr-5">Courses
+                        </x-gradient-link>
+                        <x-gradient-link href="mailto:andrea.fomera@gmail.com" class="mr-5">Email Me
+                        </x-gradient-link>
+
                     </div>
                 </div>
             </div>
