@@ -45,9 +45,7 @@
 
     <main class="flex-grow">
         <div class="max-w-4xl mx-auto pt-20 print:pt-16 px-6 lg:px-0">
-
             {{ $slot }}
-
         </div>
     </main>
 
