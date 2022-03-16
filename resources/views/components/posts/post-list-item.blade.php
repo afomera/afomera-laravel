@@ -8,7 +8,7 @@
             <span class="text-yellow-700 dark:text-yellow-300">Draft</span>
         @endif
     </span>
-    <a href="{{ $post->slug }}"
+    <a href="/posts/{{ $post->slug }}"
         class="block text-2xl text-pink-500 dark:text-pink-500 hover:text-pink-700 dark:hover:text-pink-700">
         {{ $post->title }}
     </a>
