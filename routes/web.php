@@ -30,9 +30,9 @@ Route::get('/about', function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware('can:admin')->group(function () {
-     Route::resource('admin/posts', AdminPostController::class)->except('show');
- });
+// Route::middleware('can:admin')->group(function () {
+//      Route::resource('admin/posts', AdminPostController::class)->except('show');
+//  });
 
 // Wildcard route to handle all other requests to see if a Post exists with that slug
 Route::get('/{post}', function (Post $post) {
