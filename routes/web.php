@@ -27,10 +27,16 @@ Route::get('/about', function () {
 });
 
 Route::get('/speaking', function () {
+    seo()
+        ->title("Andrea Fomera: Speaking");
+
     return view('pages.speaking', ['talks' => Talk::latest('published_at')->published()->get()]);
 });
 
 Route::get('/posts', function () {
+    seo()
+        ->title("Andrea Fomera: Journal");
+
     return view('posts.index', ['posts' => Post::latest('published_at')->published()->get()]);
 });
 
