@@ -26,6 +26,14 @@
         }
     </script>
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark.min.css"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark.min.css">
+    </noscript>
+
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 

@@ -23,11 +23,11 @@ document.getElementById('theme-switch').addEventListener('click', function() {
   }
 });
 
-// const hljs = require('highlight.js')
-// hljs.configure({ languages: ['ruby', 'erb', 'bash', 'javascript'] })
+const hljs = require('highlight.js')
+hljs.configure({ languages: ['ruby', 'erb', 'bash', 'javascript'] })
 
-// document.addEventListener('DOMContentLoaded', (event) => {
-//   document.querySelectorAll('pre').forEach((block) => {
-//     hljs.highlightElement(block)
-//   })
-// })
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre').forEach((block) => {
+    hljs.highlightElement(block)
+  })
+})
