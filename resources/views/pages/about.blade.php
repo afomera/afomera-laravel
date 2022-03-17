@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Andrea Fomera: About me">
     <div class="mb-5">
         <x-gradient-link href="/" class="text-xl">
             <- Go home</x-gradient-link>

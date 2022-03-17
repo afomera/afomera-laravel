@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Browsershot\Browsershot;
 
 class Post extends Model
 {
@@ -25,4 +26,25 @@ class Post extends Model
     {
         return 'slug';
     }
+
+    public function getOgImageHtmlAttribute()
+    {
+        return view('posts.og', ['post' => $this]);
+    }
+
+    public function getOgImageAttribute()
+    {
+        // return Cache::rememberForever('post_og_' . $this->slug, function () {
+        return Browsershot::url(
+            route('posts.og-html', $this)
+        )
+            ->windowSize(1200, 627)
+            ->deviceScaleFactor(2)
+            ->showBackground()
+            ->waitUntilNetworkIdle()
+            ->ignoreHttpsErrors()
+            ->screenshot();
+        // });
+    }
+
 }
