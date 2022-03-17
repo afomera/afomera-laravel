@@ -55,7 +55,7 @@ Route::get('/posts/{post}', function (Post $post) {
         // ->description($post->excerpt);
 
     return view("posts.show", ['post' => $post]);
-})->where('post', '.*');
+})->where('post', '.*')->name('posts.show');
 
 Route::get('/posts/{post:slug}/og-html', function (Post $post) {
     return $post->og_image_html;
