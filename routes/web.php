@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\Talk;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use Spatie\Browsershot\Browsershot;
 use App\Http\Controllers\AdminPostController;
 
 /*
