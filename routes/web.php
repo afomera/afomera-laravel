@@ -4,7 +4,7 @@ use App\Models\Post;
 use App\Models\Talk;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
-use Spatie\Browsershot\Browsershot;
+// use Spatie\Browsershot\Browsershot;
 use App\Http\Controllers\AdminPostController;
 
 /*
@@ -46,41 +46,42 @@ require __DIR__.'/auth.php';
 
 Route::get('/posts/{post}', function (Post $post) {
     seo()
-        ->twitterImage(
-            route('posts.og', $post)
-        )
-        ->image(
-            route('posts.og', $post)
-        )
+        ->title("Andrea Fomera: ". $post->title)
+        // ->twitterImage(
+        //     route('posts.og', $post)
+        // )
+        // ->image(
+        //     route('posts.og', $post)
+        // )
         ->url(route('posts.show', $post));
         // ->description($post->excerpt);
 
     return view("posts.show", ['post' => $post]);
 })->where('post', '.*')->name('posts.show');
 
-Route::get('/posts/{post:slug}/og-html', function (Post $post) {
-    return $post->og_image_html;
-})->name('posts.og-html');
+// Route::get('/posts/{post:slug}/og-html', function (Post $post) {
+//     return $post->og_image_html;
+// })->name('posts.og-html');
 
-Route::get('/posts/{post:slug}/og', function (Post $post) {
-    if (request()->has('preview')) {
-        return response(
-            Browsershot::url(
-                route('posts.og-html', $post)
-            )
-                ->windowSize(1200, 627)
-                ->deviceScaleFactor(2)
-                ->showBackground()
-                ->waitUntilNetworkIdle()
-                ->ignoreHttpsErrors()
-                ->screenshot()
-        )->header('Content-Type', 'image/png');
-    }
+// Route::get('/posts/{post:slug}/og', function (Post $post) {
+//     if (request()->has('preview')) {
+//         return response(
+//             Browsershot::url(
+//                 route('posts.og-html', $post)
+//             )
+//                 ->windowSize(1200, 627)
+//                 ->deviceScaleFactor(2)
+//                 ->showBackground()
+//                 ->waitUntilNetworkIdle()
+//                 ->ignoreHttpsErrors()
+//                 ->screenshot()
+//         )->header('Content-Type', 'image/png');
+//     }
 
-    return response(
-        $post->og_image
-    )->header('Content-Type', 'image/png');
-})->name('posts.og');
+//     return response(
+//         $post->og_image
+//     )->header('Content-Type', 'image/png');
+// })->name('posts.og');
 
 // // Wildcard route to handle all other requests to see if a Post exists with that slug
 // Route::get('/{post}', function (Post $post) {
