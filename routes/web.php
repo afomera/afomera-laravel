@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Talk;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,10 @@ Route::get('/posts/{post}', function (Post $post) {
 
     return view("posts.show", ['post' => $post]);
 })->where('post', '.*')->name('posts.show');
+
+Route::get('/{page}', function (Page $page) {
+    return view("pages.show", ['page' => $page]);
+})->where('page', '.*');
 
 // Route::get('/posts/{post:slug}/og-html', function (Post $post) {
 //     return $post->og_image_html;
